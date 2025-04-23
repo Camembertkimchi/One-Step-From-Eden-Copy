@@ -14,10 +14,16 @@ public class PlayerMovement : MonoBehaviour
 {
     Animator anim;
     bool isDead;
+    [SerializeField] GridMover gridMover;
+    [SerializeField] CommandInvoker invoker;
 
     void OnEnable()
     {
         anim = GetComponent<Animator>();
+        if(invoker == null)
+        {
+            invoker = GameObject.FindObjectOfType<CommandInvoker>();
+        }
     }
 
     
