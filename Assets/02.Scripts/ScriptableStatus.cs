@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class ScriptableStatus : ScriptableObject
 {
-    int hp;
-    int damage;
-    int abilityPower;
-    int armor;
-    int barrier;
+    public int Hp
+    {
+        get; set;
+    }
+    public int Damage
+    {
+        get; set;
+    }
+    public int AbilityPower
+    {
+        get; set;
+    }
+    public int Armor
+    {
+        get; set;
+    }
+    
 
 }

@@ -30,7 +30,7 @@ public class TileChecking : MonoBehaviour
         }
     }
 
-    private HashSet<GameObject> objectsOnTile = new HashSet<GameObject>();
+    Damageable objOnTile;
 
     private void Awake()
     {
@@ -49,13 +49,21 @@ public class TileChecking : MonoBehaviour
         }
         if(collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
+            objOnTile = collision.GetComponent<Damageable>();
             shadow.SetActive(true);
-            
+            if(tileState == TileState.Fire )
+            {
+                objOnTile.ApplyDamage(10, false);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (objOnTile != null)
+        {
+            objOnTile = null;
+        }
         if (!onIt.activeSelf)
         {
             onIt.SetActive(true);
@@ -72,23 +80,20 @@ public class TileChecking : MonoBehaviour
 
     IEnumerator FireCoroutine()
     {
+        
         while(elapsed < fireDuration)
         {
-            foreach(GameObject obj in objectsOnTile)
+            if(objOnTile != null)
             {
-                //여기 대미지 받는 클래스
-                if(obj != null)
-                {
-                    //if(target != null)
-                    //{
-                    //대미지 주기
-                    //}
-                }
+                objOnTile.ApplyDamage(10, false);
             }
-        }
-        elapsed += 1f;
 
-        yield return new WaitForSeconds(1f);
+            elapsed += 1f;
+            yield return new WaitForSeconds(1f);
+        }
+        
+
+        
     }
     
 

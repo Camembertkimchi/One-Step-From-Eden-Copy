@@ -11,5 +11,6 @@ public class ScriptableSkillObj : ScriptableObject
     float cost;
     int damage;
     string description;
+    string subDescription;
     Image icon;
 }
